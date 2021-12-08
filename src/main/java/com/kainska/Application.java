@@ -1,5 +1,8 @@
 package com.kainska;
 
+import com.kainska.view.View;
+
+
 import java.sql.SQLException;
 import java.text.ParseException;
 

@@ -21,29 +21,22 @@ public class UserDao {
         return userList;
     }
 
-    public static PrepareSession prepareSession() {
-        PrepareSession ps = new PrepareSession();
-        ps.s = HibernateSessionFactoryUtil.getSessionFactory().openSession();
-        ps.t = ps.s.beginTransaction();
-        return ps;
-    }
-
     public void create(User user) {
-        PrepareSession ps = prepareSession();
+        PrepareSession ps = new PrepareSession();
         ps.s.save(user);
         ps.t.commit();
         ps.s.close();
     }
 
     public void update(User user) {
-        PrepareSession ps = prepareSession();
+        PrepareSession ps = new PrepareSession();
         ps.s.update(user);
         ps.t.commit();
         ps.s.close();
     }
 
     public void delete(User user) {
-        PrepareSession ps = prepareSession();
+        PrepareSession ps = new PrepareSession();
         ps.s.delete(user);
         ps.t.commit();
         ps.s.close();
