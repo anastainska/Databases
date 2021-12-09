@@ -3,11 +3,11 @@ package com.kainska.service;
 import com.kainska.dao.PhotoDao;
 import com.kainska.model.Photo;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class PhotoService {
 
-    public List<Photo> findAllPhoto() {
+    public ArrayList<String[]> findAllPhoto() {
         return new PhotoDao().findAll();
     }
 
@@ -23,7 +23,7 @@ public class PhotoService {
         new PhotoDao().update(photo);
     }
 
-    public void deletePhoto(Photo photo) {
-        new PhotoDao().delete(photo);
+    public void deletePhoto(int id) {
+        new PhotoDao().delete(id);
     }
 }

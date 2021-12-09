@@ -1,12 +1,10 @@
 package com.kainska.view;
 
 import com.kainska.controller.Controller;
-import com.kainska.model.User;
 import com.kainska.model.*;
 
-import java.sql.SQLException;
+import java.sql.*;
 import java.text.ParseException;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -79,8 +77,8 @@ public class View {
         switch (choice) {
             case 1:
                 System.out.println("All users:");
-                for (User user : controller.findAllUser()) {
-                    System.out.println(user);
+                for (String[] user : controller.findAllUser()) {
+                    System.out.println(Arrays.toString(user));
                 }
                 interactMenu();
                 break;
@@ -131,9 +129,7 @@ public class View {
                 user = new User();
                 System.out.print("Enter id: ");
                 user.setId(new Scanner(System.in).nextInt());
-                user.setEmail("delete");
-                user.setPhoneNumber("no");
-                controller.deleteUser(user);
+                controller.deleteUser(user.getId());
                 interactMenu();
                 break;
             case 0:
@@ -158,9 +154,8 @@ public class View {
         switch (choice) {
             case 1:
                 System.out.println("All comments:");
-                ArrayList<String[]> list = controller.findAllComment();
-                for (String[] strings : list) {
-                    System.out.println(Arrays.toString(strings));
+                for (String[] comment : controller.findAllComment()) {
+                    System.out.println(Arrays.toString(comment));
                 }
                 interactMenu();
                 break;
@@ -197,9 +192,7 @@ public class View {
                 comment = new Comment();
                 System.out.print("Enter id: ");
                 comment.setId(new Scanner(System.in).nextInt());
-                comment.setPostId(0);
-                comment.setDateComment(java.sql.Timestamp.valueOf("0000-00-00 00:00:00"));
-                controller.deleteComment(comment);
+                controller.deleteComment(comment.getId());
                 interactMenu();
                 break;
             case 0:
@@ -223,8 +216,8 @@ public class View {
         switch (choice) {
             case 1:
                 System.out.println("All likes of comments:");
-                for (LikeComment likeComment : controller.findAllLikeComment()) {
-                    System.out.println(likeComment);
+                for (String[] likeComment : controller.findAllLikeComment()) {
+                    System.out.println(Arrays.toString(likeComment));
                 }
                 interactMenu();
                 break;
@@ -237,7 +230,6 @@ public class View {
                 LikeComment likeComment = new LikeComment();
                 System.out.println("Enter like for comment id: ");
                 likeComment.setCommentId(new Scanner(System.in).nextInt());
-
                 controller.createLikeComment(likeComment);
                 interactMenu();
                 break;
@@ -245,7 +237,6 @@ public class View {
                 likeComment = new LikeComment();
                 System.out.println("Enter like for comment id: ");
                 likeComment.setCommentId(new Scanner(System.in).nextInt());
-
                 controller.updateLikeComment(likeComment);
                 interactMenu();
                 break;
@@ -253,8 +244,7 @@ public class View {
                 likeComment = new LikeComment();
                 System.out.print("Enter id: ");
                 likeComment.setId(new Scanner(System.in).nextInt());
-                likeComment.setCommentId(0);
-                controller.deleteLikeComment(likeComment);
+                controller.deleteLikeComment(likeComment.getId());
                 interactMenu();
                 break;
             case 0:
@@ -278,8 +268,8 @@ public class View {
         switch (choice) {
             case 1:
                 System.out.println("All likes for post:");
-                for (LikePost likePost : controller.findAllLikePost()) {
-                    System.out.println(likePost);
+                for (String[] likePost : controller.findAllLikePost()) {
+                    System.out.println(Arrays.toString(likePost));
                 }
                 interactMenu();
                 break;
@@ -312,9 +302,7 @@ public class View {
                 likePost = new LikePost();
                 System.out.print("Enter id: ");
                 likePost.setId(new Scanner(System.in).nextInt());
-                likePost.setPostId(0);
-                likePost.setTimeCreationLike((java.sql.Timestamp.valueOf("0000-00-00 00:00:00")));
-                controller.deleteLikePost(likePost);
+                controller.deleteLikePost(likePost.getId());
                 interactMenu();
                 break;
             case 0:
@@ -338,8 +326,8 @@ public class View {
         switch (choice) {
             case 1:
                 System.out.println("All messages:");
-                for (Message message : controller.findAllMessage()) {
-                    System.out.println(message);
+                for (String[] message : controller.findAllMessage()) {
+                    System.out.println(Arrays.toString(message));
                 }
                 interactMenu();
                 break;
@@ -379,10 +367,8 @@ public class View {
             case 5:
                 message = new Message();
                 System.out.print("Enter id: ");
-                message.setTimeCreation((java.sql.Timestamp.valueOf("0000-00-00 00:00:00")));
-                message.setTimeSeen(java.sql.Timestamp.valueOf("0000-00-00 00:00:00"));
-                message.setUserId(0);
-                controller.deleteMessage(message);
+                message.setId(new Scanner(System.in).nextInt());
+                controller.deleteMessage(message.getId());
                 interactMenu();
                 break;
             case 0:
@@ -406,8 +392,8 @@ public class View {
         switch (choice) {
             case 1:
                 System.out.println("All photos:");
-                for (Photo photo : controller.findAllPhoto()) {
-                    System.out.println(photo);
+                for (String[] photo : controller.findAllPhoto()) {
+                    System.out.println(Arrays.toString(photo));
                 }
                 interactMenu();
                 break;
@@ -447,10 +433,8 @@ public class View {
             case 5:
                 photo = new Photo();
                 System.out.print("Enter id: ");
-                photo.setPhoto((byte) 0);
-                photo.setPostId(0);
-                photo.setStoryId(0);
-                controller.deletePhoto(photo);
+                photo.setId(new Scanner(System.in).nextInt());
+                controller.deletePhoto(photo.getId());
                 interactMenu();
                 break;
             case 0:
@@ -474,8 +458,8 @@ public class View {
         switch (choice) {
             case 1:
                 System.out.println("All posts:");
-                for (Post post : controller.findAllPost()) {
-                    System.out.println(post);
+                for (String[] photo : controller.findAllPhoto()) {
+                    System.out.println(Arrays.toString(photo));
                 }
                 interactMenu();
                 break;
@@ -515,10 +499,8 @@ public class View {
             case 5:
                 post = new Post();
                 System.out.print("Enter id: ");
-                post.setUserId(0);
-                post.setPhoto((byte) 0);
-                post.setDatePost((java.sql.Timestamp.valueOf("0000-00-00 00:00:00")));
-                controller.deletePost(post);
+                post.setId(new Scanner(System.in).nextInt());
+                controller.deletePost(post.getId());
                 interactMenu();
                 break;
             case 0:
@@ -542,8 +524,8 @@ public class View {
         switch (choice) {
             case 1:
                 System.out.println("All security:");
-                for (Security security : controller.findAllSecurity()) {
-                    System.out.println(security);
+                for (String[] security : controller.findAllSecurity()) {
+                    System.out.println(Arrays.toString(security));
                 }
                 interactMenu();
                 break;
@@ -583,10 +565,8 @@ public class View {
             case 5:
                 security = new Security();
                 System.out.print("Enter id: ");
-                security.setUserId(0);
-                security.setNickname("no");
-                security.setPassword("no");
-                controller.deleteSecurity(security);
+                security.setId(new Scanner(System.in).nextInt());
+                controller.deleteSecurity(security.getId());
                 interactMenu();
                 break;
             case 0:
@@ -610,8 +590,8 @@ public class View {
         switch (choice) {
             case 1:
                 System.out.println("All stories:");
-                for (Story story : controller.findAllStory()) {
-                    System.out.println(story);
+                for (String[] story : controller.findAllStory()) {
+                    System.out.println(Arrays.toString(story));
                 }
                 interactMenu();
                 break;
@@ -647,8 +627,8 @@ public class View {
             case 5:
                 story = new Story();
                 System.out.print("Enter id: ");
-                story.setUserId(0);
-                controller.deleteStory(story);
+                story.setId(new Scanner(System.in).nextInt());
+                controller.deleteStory(story.getId());
                 interactMenu();
                 break;
             case 0:

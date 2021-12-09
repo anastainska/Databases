@@ -3,11 +3,11 @@ package com.kainska.service;
 import com.kainska.dao.LikePostDao;
 import com.kainska.model.LikePost;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class LikePostService {
 
-    public List<LikePost> findAllLikePost() {
+    public ArrayList<String[]> findAllLikePost() {
         return new LikePostDao().findAll();
     }
 
@@ -23,7 +23,7 @@ public class LikePostService {
         new LikePostDao().update(likePost);
     }
 
-    public void deleteLikePost(LikePost likePost) {
-        new LikePostDao().delete(likePost);
+    public void deleteLikePost(int id) {
+        new LikePostDao().delete(id);
     }
 }

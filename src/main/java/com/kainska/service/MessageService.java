@@ -3,11 +3,11 @@ package com.kainska.service;
 import com.kainska.dao.MessageDao;
 import com.kainska.model.Message;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class MessageService {
 
-    public List<Message> findAllMessage() {
+    public ArrayList<String[]> findAllMessage() {
         return new MessageDao().findAll();
     }
 
@@ -23,7 +23,7 @@ public class MessageService {
         new MessageDao().update(message);
     }
 
-    public void deleteMessage(Message message) {
-        new MessageDao().delete(message);
+    public void deleteMessage(int id) {
+        new MessageDao().delete(id);
     }
 }

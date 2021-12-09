@@ -3,12 +3,12 @@ package com.kainska.service;
 import com.kainska.dao.LikeCommentDao;
 import com.kainska.model.LikeComment;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class LikeCommentService {
 
-    public List<LikeComment> findAllLikeComment() {
-        return new LikeCommentDao().findAll();
+    public ArrayList<String[]> findAllLikeComment() {
+        return new LikeCommentDao().findAllLikeComment();
     }
 
     public LikeComment findLikeCommentById(int id) {
@@ -23,7 +23,7 @@ public class LikeCommentService {
         new LikeCommentDao().update(likeComment);
     }
 
-    public void deleteLikeComment(LikeComment likeComment) {
-        new LikeCommentDao().delete(likeComment);
+    public void deleteLikeComment(int id) {
+        new LikeCommentDao().delete(id);
     }
 }

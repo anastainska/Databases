@@ -3,11 +3,11 @@ package com.kainska.service;
 import com.kainska.dao.SecurityDao;
 import com.kainska.model.Security;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class SecurityService {
 
-    public List<Security> findAllSecurity() {
+    public ArrayList<String[]> findAllSecurity() {
         return new SecurityDao().findAll();
     }
 
@@ -23,7 +23,7 @@ public class SecurityService {
         new SecurityDao().update(security);
     }
 
-    public void deleteSecurity(Security security) {
-        new SecurityDao().delete(security);
+    public void deleteSecurity(int id) {
+        new SecurityDao().delete(id);
     }
 }

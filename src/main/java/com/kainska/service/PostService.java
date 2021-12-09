@@ -3,11 +3,11 @@ package com.kainska.service;
 import com.kainska.dao.PostDao;
 import com.kainska.model.Post;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class PostService {
 
-    public List<Post> findAllPost() {
+    public ArrayList<String[]> findAllPost() {
         return new PostDao().findAll();
     }
 
@@ -23,7 +23,7 @@ public class PostService {
         new PostDao().update(post);
     }
 
-    public void deletePost(Post post) {
-        new PostDao().delete(post);
+    public void deletePost(int id) {
+        new PostDao().delete(id);
     }
 }

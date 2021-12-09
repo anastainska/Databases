@@ -3,11 +3,11 @@ package com.kainska.service;
 import com.kainska.dao.StoryDao;
 import com.kainska.model.Story;
 
-import java.util.List;
+import java.util.ArrayList;
 
 public class StoryService {
 
-    public List<Story> findAllStory() {
+    public ArrayList<String[]> findAllStory() {
         return new StoryDao().findAll();
     }
 
@@ -23,7 +23,7 @@ public class StoryService {
         new StoryDao().update(story);
     }
 
-    public void deleteStory(Story story) {
-        new StoryDao().delete(story);
+    public void deleteStory(int id) {
+        new StoryDao().delete(id);
     }
 }

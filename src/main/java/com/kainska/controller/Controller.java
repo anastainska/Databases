@@ -1,12 +1,9 @@
 package com.kainska.controller;
 
-import com.kainska.dao.*;
 import com.kainska.model.*;
 import com.kainska.service.*;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
-import java.util.List;
 
 public class Controller {
 
@@ -33,57 +30,57 @@ public class Controller {
     }
 
     public User findUserById(Integer id) { return userService.findUserById(id); }
-    public List<User> findAllUser() { return userService.findAllUser(); }
+    public ArrayList<String[]> findAllUser() { return userService.findAllUser(); }
     public void createUser(User user) { userService.createUser(user); }
     public void updateUser(User user) { userService.updateUser(user); }
-    public void deleteUser(User user) { userService.deleteUser(user); }
+    public void deleteUser(int id) { userService.deleteUser(id); }
 
     public LikeComment findLikeCommentById(Integer id) { return likeCommentService.findLikeCommentById(id); }
-    public List<LikeComment> findAllLikeComment() { return likeCommentService.findAllLikeComment(); }
+    public ArrayList<String[]> findAllLikeComment() { return likeCommentService.findAllLikeComment(); }
     public void createLikeComment(LikeComment likeComment) { likeCommentService.createLikeComment(likeComment); }
     public void updateLikeComment(LikeComment likeComment) { likeCommentService.updateLikeComment(likeComment); }
-    public void deleteLikeComment(LikeComment likeComment) { likeCommentService.deleteLikeComment(likeComment); }
+    public void deleteLikeComment(int id) { likeCommentService.deleteLikeComment(id); }
 
     public Comment findCommentById(Integer id) { return commentService.findCommentById(id); }
-    public ArrayList<String[]> findAllComment() throws SQLException { return commentService.findAllComment(); }
+    public ArrayList<String[]> findAllComment() { return commentService.findAllComment(); }
     public void createComment(Comment comment) { commentService.createComment(comment); }
     public void updateComment(Comment comment) { commentService.updateComment(comment); }
-    public void deleteComment(Comment comment) { commentService.deleteComment(comment); }
+    public void deleteComment(int id) { commentService.deleteComment(id); }
 
     public LikePost findLikePostById(Integer id) { return likePostService.findLikePostById(id); }
-    public List<LikePost> findAllLikePost() { return likePostService.findAllLikePost(); }
+    public ArrayList<String[]> findAllLikePost() { return likePostService.findAllLikePost(); }
     public void createLikePost(LikePost likePost) { likePostService.createLikePost(likePost); }
     public void updateLikePost(LikePost likePost) { likePostService.updateLikePost(likePost); }
-    public void deleteLikePost(LikePost likePost) { likePostService.deleteLikePost(likePost); }
+    public void deleteLikePost(int id) { likePostService.deleteLikePost(id); }
 
     public Message findMessageById(Integer id) { return messageService.findMessageById(id); }
-    public List<Message> findAllMessage() { return messageService.findAllMessage(); }
+    public ArrayList<String[]> findAllMessage() { return messageService.findAllMessage(); }
     public void createMessage(Message message) { messageService.createMessage(message); }
     public void updateMessage(Message message) { messageService.updateMessage(message); }
-    public void deleteMessage(Message message) { messageService.deleteMessage(message); }
+    public void deleteMessage(int id) { messageService.deleteMessage(id); }
 
     public Photo findPhotoById(Integer id) { return photoService.findPhotoById(id); }
-    public List<Photo> findAllPhoto() { return photoService.findAllPhoto(); }
+    public ArrayList<String[]> findAllPhoto() { return photoService.findAllPhoto(); }
     public void createPhoto(Photo photo) { photoService.createPhoto(photo); }
     public void updatePhoto(Photo photo) { photoService.updatePhoto(photo); }
-    public void deletePhoto(Photo photo) { photoService.deletePhoto(photo); }
+    public void deletePhoto(int id) { photoService.deletePhoto(id); }
 
     public Post findPostById(Integer id) { return postService.findPostById(id); }
-    public List<Post> findAllPost() { return postService.findAllPost(); }
+    public ArrayList<String[]> findAllPost() { return postService.findAllPost(); }
     public void createPost(Post post) { postService.createPost(post); }
     public void updatePost(Post post) { postService.updatePost(post); }
-    public void deletePost(Post post) { postService.deletePost(post); }
+    public void deletePost(int id) { postService.deletePost(id); }
 
     public Security findSecurityById(Integer id) { return securityService.findSecurityById(id); }
-    public List<Security> findAllSecurity() { return securityService.findAllSecurity(); }
+    public ArrayList<String[]> findAllSecurity() { return securityService.findAllSecurity(); }
     public void createSecurity(Security security) { securityService.createSecurity(security); }
     public void updateSecurity(Security security) { securityService.updateSecurity(security); }
-    public void deleteSecurity(Security security) { securityService.deleteSecurity(security); }
+    public void deleteSecurity(int id) { securityService.deleteSecurity(id); }
 
     public Story findStoryById(Integer id) { return storyService.findStoryById(id); }
-    public List<Story> findAllStory() { return storyService.findAllStory(); }
+    public ArrayList<String[]> findAllStory() { return storyService.findAllStory(); }
     public void createStory(Story story) { storyService.createStory(story); }
     public void updateStory(Story story) { storyService.updateStory(story); }
-    public void deleteStory(Story story) { storyService.deleteStory(story); }
+    public void deleteStory(int id) { storyService.deleteStory(id); }
 
 }
