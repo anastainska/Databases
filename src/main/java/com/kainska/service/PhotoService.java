@@ -1,29 +1,57 @@
 package com.kainska.service;
 
-import com.kainska.dao.PhotoDao;
-import com.kainska.model.Photo;
+import com.kainska.Repository.PhotoRepository;
+import com.kainska.domain.Photo;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
+@Service
 public class PhotoService {
+    @Autowired
+    PhotoRepository photoRepository;
 
-    public ArrayList<String[]> findAllPhoto() {
-        return new PhotoDao().findAll();
+    public List<Photo> findAll() throws Exception {
+        List<Photo> photos = new LinkedList<>(photoRepository.findAll());
+        if (photos.isEmpty()) {
+            return null;
+        }
+        return photos;
     }
 
-    public Photo findPhotoById(int id) {
-        return new PhotoDao().findById(id);
+    public Photo findById(Integer id) throws Exception {
+        if (photoRepository.findById(id).isPresent()) {
+            return photoRepository.findById(id).get();
+        }
+        return null;
     }
 
-    public void createPhoto(Photo Photo) {
-        new PhotoDao().create(Photo);
+    @Transactional
+    public void create(Photo entity) throws Exception {
+        if (entity != null) {
+            photoRepository.save(entity);
+        }
     }
 
-    public void updatePhoto(Photo photo) {
-        new PhotoDao().update(photo);
+    @Transactional
+    public void update(Photo photo) throws Exception {
+        photoRepository.findById(photo.getId())
+                .map(oldEntity -> {
+                    oldEntity.setPhoto(photo.getPhoto());
+                    oldEntity.setPostId(photo.getPostId());
+                    oldEntity.setStoryId(photo.getStoryId());
+                    return photoRepository.save(oldEntity);
+                })
+                .orElseGet(() -> photoRepository.save(photo));
     }
 
-    public void deletePhoto(int id) {
-        new PhotoDao().delete(id);
+    @Transactional
+    public void delete(Integer id) throws Exception {
+        if (photoRepository.findById(id).isPresent()) {
+            photoRepository.delete(findById(id));
+        }
     }
 }

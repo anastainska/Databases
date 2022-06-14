@@ -1,29 +1,60 @@
 package com.kainska.service;
 
-import com.kainska.dao.LikePostDao;
-import com.kainska.model.LikePost;
+import com.kainska.Repository.LikePostRepository;
+import com.kainska.domain.Comment;
+import com.kainska.domain.LikeComment;
+import com.kainska.domain.LikePost;
+import com.kainska.Repository.LikeCommentRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.ArrayList;
+import java.util.LinkedList;
+import java.util.List;
 
+@Service
 public class LikePostService {
+    @Autowired
+    LikePostRepository likePostRepository;
 
-    public ArrayList<String[]> findAllLikePost() {
-        return new LikePostDao().findAll();
+    public List<LikePost> findAll() throws Exception {
+        List<LikePost> likePosts = new LinkedList<>(likePostRepository.findAll());
+        if (likePosts.isEmpty()) {
+            return null;
+        }
+        return likePosts;
     }
 
-    public LikePost findLikePostById(int id) {
-        return new LikePostDao().findById(id);
+    public LikePost findById(Integer id) throws Exception {
+        if (likePostRepository.findById(id).isPresent()) {
+            return likePostRepository.findById(id).get();
+        }
+        return null;
     }
 
-    public void createLikePost(LikePost LikePost) {
-        new LikePostDao().create(LikePost);
+    @Transactional
+    public void create(LikePost entity) throws Exception {
+        if (entity != null) {
+            likePostRepository.save(entity);
+        }
     }
 
-    public void updateLikePost(LikePost likePost) {
-        new LikePostDao().update(likePost);
+    @Transactional
+    public void update(LikePost likePost) throws Exception {
+        likePostRepository.findById(likePost.getId())
+                .map(oldEntity -> {
+                    oldEntity.setTimeCreationLike(likePost.getTimeCreationLike());
+                    oldEntity.setPostId(likePost.getPostId());
+                    return likePostRepository.save(oldEntity);
+                })
+                .orElseGet(() -> likePostRepository.save(likePost));
     }
 
-    public void deleteLikePost(int id) {
-        new LikePostDao().delete(id);
+    @Transactional
+    public void delete(Integer id) throws Exception {
+        if (likePostRepository.findById(id).isPresent()) {
+            likePostRepository.delete(findById(id));
+        }
     }
 }
+

@@ -1,15 +1,11 @@
 package com.kainska;
 
-import com.kainska.view.View;
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
 
-
-import java.sql.SQLException;
-import java.text.ParseException;
-
+@SpringBootApplication
 public class Application {
-
-    public static void main(String[] args) throws SQLException, ParseException {
-        View view = new View();
-        view.interactMenu();
+    public static void main(String[] args) {
+        SpringApplication.run(Application.class, args);
     }
 }
