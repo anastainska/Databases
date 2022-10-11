@@ -1,0 +1,8 @@
+{
+  "properties": [
+    {
+      "name": "spring.datasource.spring.cloud.appId=spring-boot",
+      "type": "java.lang.String",
+      "description": "Description for spring.datasource.spring.cloud.appId=spring-boot."
+  }
+] }

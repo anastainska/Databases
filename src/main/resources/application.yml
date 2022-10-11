@@ -1,14 +1,32 @@
+runtime: java
+env: flex
+runtime_config:
+  jdk: openjdk8
+env_variables:
+  SPRING_PROFILES_ACTIVE: "gcp,mysql"
+handlers:
+  - url: /.*
+    script: this field is required, but ignored
+manual_scaling:
+  instances: 1
+
 spring:
   datasource:
     url: jdbc:mysql://localhost:3306/kainska?serverTimezone=UTC&useSSL=false&allowPublicKeyRetrieval=true
     username: root
     password: Iamcrowley666
     driver-class-name: com.mysql.cj.jdbc.Driver
+    spring:
+      cloud:
+        appId=spring-boot
   jpa:
     show-sql: true
     hibernate:
       ddl-auto: validate
       naming-strategy: org.hibernate.cfg.ImprovedNamingStrategy
+  profiles:
+    active: mysql
 
 server:
   port: 8081
+
